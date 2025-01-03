@@ -1,0 +1,372 @@
+<!--
+111550035 蔡昀錚 第一次作業 9/26
+111550035 Yun-Cheng Tsai The First Homework 9/26
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Department Page</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @font-face {
+            font-family: 'enfont';
+            src: url('../font/enfont.ttf') format('truetype');
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'enfont', sans-serif;
+        }
+
+        /* Full Page Video Background */
+        body {
+            position: relative;
+            cursor: url('../img/saturn.png'), auto;	
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Main Layout: Two Halves */
+        .container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Left Half: Image Slider */
+        .left-half {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient Overlay on Top of Sliding Images */
+        .left-half::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+        }
+
+        .slider {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Slider Animation */
+        .slides {
+            display: flex;
+            width: 300%; /* To fit 3 images */
+            animation: slide 9s infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0%); }
+            33.33% { transform: translateX(-100%); }
+            66.66% { transform: translateX(-200%); }
+            100% { transform: translateX(0%); }
+        }
+
+        /* Slide Structure */
+        .slide {
+            min-width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Arrow Navigation */
+        .arrow {
+            color: white;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px;
+            border: none;
+            z-index: 100; /* Arrows on top of everything */
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            font-size: 1.5em;
+            user-select: none;
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        /* Right Half: Department Introduction */
+        .right-half {
+            flex: 1;
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            text-align: left;
+            background: rgba(0, 0, 0, 0.5); /* Optional: Background for better text visibility */
+        }
+          
+          
+        /* Scrollable Container with Limited Height */
+        .scroll-container {
+            width: 100%;
+            max-height: 50vh; /* Limit height to 50% of viewport height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 2vw; /* Space for scrollbar */
+            padding-left: 3vw;
+        }
+
+        /* Content Container */
+        .content-container {
+            width: 90%;
+            animation: fadeIn 1s ease-in 0s;
+        }
+
+        /* Text Section */
+        .text-section h1 {
+            margin-bottom: 10px;
+            font-size: 2.8em;
+        }
+
+        .text-section h2 {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: rgb(155, 172, 182);
+        }
+
+        .text-section strong {
+            color: rgb(155, 172, 182);
+        }
+
+        .text-section p {
+            font-size: 1.1em;
+            position: relative; /* Needed for the ::before pseudo-element */
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: justify; /* Justify the text */
+            padding-left: 15px; /* Space for the line */
+        }
+
+        .text-section p::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px; /* Width of the line */
+            height: 100%;
+            background-color: white; /* Color of the line */
+        }
+
+        /* Optional Styling for the Safari Icon */
+        .Safari {
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+        .Safari:hover {
+            transform: scale(1.2);
+        }
+
+        /* Map Icon Styling */
+        .map {
+            width: 1vw;
+            height: 1vw;
+            margin-left: 5px;
+        }
+
+        .map:hover {
+            transform: scale(1.2);
+        }
+
+        /* Home Link Styling */
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 3;
+        }
+
+        .home-link img {
+            width: 3vw; /* Adjust size based on viewport */
+            height: 3vw;
+        }
+
+        /* Sitemap Link Styling */
+        .sitemap-link {
+            position: fixed;
+            bottom: 3.5vw;
+            right: 3.5vw;
+            z-index: 2;
+            font-family: 'enfont', sans-serif;
+            color: white;
+            font-size: 2vw;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+          
+
+        .sitemap-link img {
+            width: 1.5vw; /* Adjust size based on viewport */
+            height: 1.5vw;
+            margin-left: 20px;
+        }
+
+        .sitemap-link:hover {
+            color: lightblue;
+            transform: scale(1.1);
+            text-shadow: 0 0 10px lightblue;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .right-half {
+                margin-top: 20px;
+                padding: 20px;
+            }
+
+            .text-section p::before {
+                width: 1px; /* Thinner line on smaller screens */
+            }
+
+            .text-section p {
+                padding-left: 10px; /* Less padding on smaller screens */
+            }
+
+            .text-section h1 {
+                font-size: 2em;
+            }
+
+            .text-section h2 {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .text-section p {
+                font-size: 1em;
+            }
+
+            .home-link img, .sitemap-link img {
+                width: 4vw;
+                height: 4vw;
+            }
+
+
+        }
+    </style>
+</head>
+<body>
+
+  <!-- Video Background -->
+  <video autoplay muted loop>
+    <source src="../video/main.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Content Container -->
+  <div class="container">
+    
+    <!-- Left Half: Image Slider -->
+    <div class="left-half">
+        <div class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="../img/cs.jpg" alt="Image 1">
+            </div>
+            <div class="slide">
+                <img src="../img/cs2.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+                <img src="../img/cs3.jpg" alt="Image 3">
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Half: Department Introduction -->
+    <div class="right-half">
+        <div class="scroll-container">
+            <div class="content-container">
+            <div class="text-section">
+                <h1>NYCU Computer Science
+                <a href="https://www.cs.nycu.edu.tw/">
+                    <img class="Safari" src="../img/safari.png" alt="Website">
+                </a>
+                </h1>
+                <h2>Since 1972</h2>
+                <p>
+                <strong>Address:</strong> NYCU Guangfu Campus EC
+                <a href="https://g.co/kgs/EajenJ9">
+                    <img class="map" src="../img/map.png" alt="Map">
+                </a>
+                </p>
+                <p><strong>Introduction:</strong> The curriculum design concept of this department is to cultivate information engineering talents with professional and problem-solving abilities. In addition to the common courses of the school (foreign language and general studies), the curriculum planning is divided into three parts: professional compulsory courses, professional electives and free electives. The main purpose of the professional required courses is to lay the academic foundation for students to have information engineering; the professional elective courses are to increase the depth and breadth of students in the information field; the free elective courses are reserved for students to be flexible, so that students can freely study this subject according to their own interests.</p>
+                <p><strong>My Experience:</strong> NYCU CS provides extraordinary education in the computer science field, which is the main reason I chose to study here. I am currently in my junior year at NYCU CS, and I have learned a lot of programming skills. I have also improved my presentation and social abilities. I believe NYCU CS offers an ideal environment for students interested in computers.</p>
+                
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Link -->
+  <a href="../index.html" class="home-link">
+        <img src="../img/home.png" alt="Home">
+  </a>
+
+  <!-- Sitemap Link -->
+  <a href="./sitemap.html" class="sitemap-link">Back
+        <img src="../img/arrow.png" alt="Sitemap">
+  </a>
+  
+</body>
+</html>

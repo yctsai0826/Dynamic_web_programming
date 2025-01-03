@@ -1,0 +1,191 @@
+<!--
+111550035 蔡昀錚 第一次作業 9/26
+111550035 Yun-Cheng Tsai The First Homework 9/26
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Site Map - Yun-Cheng Tsai's Website</title>
+    <style>
+        /* CSS Styles */
+
+        /* Font Face */
+        @font-face {
+            font-family: 'enfont';
+            src: url('../font/enfont.ttf') format('truetype');
+        }
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Body Styles */
+        body {
+            margin: 0;
+            font-family: 'enfont', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        body, html {
+            cursor: url('../gif/kirby.gif'), auto;	
+        }
+
+        @keyframes cursor{
+            0% { 
+                cursor: url(frame1.gif), auto;
+            }
+            50% { 
+                cursor: url(frame2.gif), auto;
+            }
+            100% { 
+                cursor: url(frame3.gif), auto;
+            }
+        }
+
+
+        /* General Element Styles */
+        header, nav, main, footer {
+            text-align: center;
+            padding: 0px;
+        }
+
+        /* Main Content Styles */
+        main {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh; /* Ensure it fills the viewport height */
+            color: white;
+            background-image: url('../img/en-site.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Main Content Container */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Image Styles */
+        .star, .line {
+            width: 17vh;
+            max-width: 150px; /* Adjust as needed */
+            height: auto;
+            margin: 20px 0;
+            z-index: 1;
+        }
+
+        /* Sitemap Styles */
+        .sitemap {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: center;
+            animation: fadeIn 1s ease-in 0s;
+        }
+
+        .sitemap li {
+            margin: 10px 0;
+        }
+
+        /* General link styles */
+        .sitemap a {
+            position: relative; /* Allows the pseudo-element to be positioned relative to the link */
+            text-decoration: none;
+            font-size: 5vw; /* Responsive font size */
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        /* Hover effect: change text color */
+        .sitemap a:hover {
+            color: #7a6690;
+        }
+
+        /* Add an arrow when hovered */
+        .sitemap a:hover::after {
+            content: ' >'; /* Unicode for right arrow */
+            transition: content 0.3s ease; /* Smooth content transition */
+        }
+
+        /* Back to Home Link */
+        .back-home {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in 0s;
+        }
+
+        .back-home a {
+            text-decoration: none;
+            font-size: 5vw; /* Responsive font size */
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            color: #726690;
+            text-shadow: 0 0 10px rgb(31, 20, 41);
+        }
+
+        .arrow-icon {
+            width: 24px;
+            height: auto;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        /* Responsive Font Sizes */
+        @media (min-width: 600px) {
+            .sitemap a {
+                font-size: 3vh;
+            }
+            .back-home a {
+                font-size: 3vh;
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <main>
+
+        <img src="../img/star.png" class="star" alt="Star Image">
+
+        <ul class="sitemap">
+            <li><a href="./about.html">About Me</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="./cv.html">CV</a></li>
+            <li><a href="./department.html">Department</a></li>
+            <li><a href="./hobby.html">Hobby</a></li>
+            <li><a href="./senior.html">Senior High School</a></li>
+        </ul>
+
+        <img src="../img/line.png" class="line" alt="Line Image">
+
+        <div class="back-home">
+            <a href="../index.html">Back to Home
+                <img src="../img/arrow.png" alt="Arrow" class="arrow-icon">
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

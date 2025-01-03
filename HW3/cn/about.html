@@ -1,0 +1,272 @@
+<!-- 111550035 蔡昀錚 第三次作業 11/1
+111550035 Yun-Cheng Tsai The Third Homework 11/1 -->
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的個人介紹</title>
+    <style>
+
+        @font-face {
+            font-family: 'cnfont';
+            src: url('../font/cnfont3.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'cnfont2';
+            src: url('../font/cnfont4.ttf') format('truetype');
+        }
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: 'cnfont', sans-serif;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            color: white;
+            cursor: url('../img/ET2.png'), auto;	
+        }
+        
+        #video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 5%;
+        }
+        
+        .name-and-text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 5%;
+            max-width: 100%;
+            flex: 1 1 30vw; /* Allow to grow or shrink according to viewport width */
+            animation: fadeIn 1s ease-in 0s 1 normal;
+        }
+        
+        .name {
+            font-size: 2.5vw; /* Use vw to scale font size with the window width */
+            margin-bottom: 1rem;
+        }
+        
+        .text-content {
+            font-size: 1.5vw; /* Text scales based on viewport width */
+            color: #bcbcbc;
+        }
+        
+        .text-content img {
+            width: 2vw; /* Adjust image size relative to viewport width */
+            height: 2vw;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        .portrait-container {
+            position: relative;
+            width: 100%;
+            max-width: 30vw; /* Set max width to viewport width percentage */
+            flex: 1 1 30vw; /* Allow the image container to scale with viewport */
+            margin: 0 auto;
+        }
+        
+        .portrait, .portrait-hover {
+            display: block;
+            width: 100%;
+            height: auto;
+            position: relative;
+            object-fit: cover;
+        }
+        
+        .portrait-hover {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .portrait-container:hover .portrait-hover {
+            opacity: 1;
+        }
+        
+        .portrait-container:hover .portrait {
+            opacity: 1;
+        }
+        
+        .next-page-option {
+            position: fixed;
+            bottom: 5vh; /* Adjust button position based on viewport height */
+            right: 5vw; /* Adjust button position based on viewport width */
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .click-text {
+            font-family: 'cnfont2', sans-serif;
+            font-size: 3vw;
+            font-weight: bold;
+            color: rgb(117, 172, 143);
+            margin-right: 1vw; /* Use viewport width for spacing */
+        }
+        
+        .next-page-option a {
+            display: block;
+        }
+        
+        .next-page-option img {
+            width: 10vw; /* Adjust image size relative to viewport width */
+            height: auto;
+            display: block;
+        }
+
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 3;
+        }
+
+        .home-link img {
+            width: 3vw; /* 使用視窗寬度的百分比來調整圖片大小 */
+            height: 3vw; /* 讓圖片保持比例，隨著視窗大小變化 */
+        }
+
+        .cursor-here {
+            position: fixed;
+            bottom: 15vh; /* Adjust button position based on viewport height */
+            left: 11vw; /* Adjust button position based on viewport width */
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 3vh;
+            color: rgb(247, 224, 122);
+        }
+        
+        /* Media Queries for Smaller Screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 5%;
+            }
+        
+            .name-and-text {
+                margin-left: 0;
+                margin-top: 20px;
+                align-items: center;
+                text-align: center;
+            }
+        
+            .portrait-container {
+                max-width: 80%;
+            }
+        
+            .next-page-option {
+                bottom: 10px;
+                right: 10px;
+            }
+        
+            .click-text {
+                font-size: 2.5vw; /* Increase the text size for smaller screens */
+            }
+        
+            .next-page-option img {
+                width: 15vw;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .name {
+                font-size: 4vw; /* Increase font size for smaller screens */
+            }
+        
+            .text-content {
+                font-size: 3vw; /* Adjust text size based on viewport */
+            }
+        
+            .text-content img {
+                width: 3vw;
+                height: 3vw;
+            }
+        
+            .click-text {
+                display: none; /* Hide click text on very small screens */
+            }
+        
+            .next-page-option img {
+                width: 20vw; /* Increase size of image for smaller screens */
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop>
+        <source src="../video/main.mp4" type="video/mp4">
+        您的瀏覽器不支援此視頻標籤。
+    </video>
+
+    <div class="container">
+        <div class="portrait-container">
+            <img src="../img/self.png" alt="自我肖像" class="portrait">
+            <img src="../img/self2.png" alt="懸停圖像" class="portrait-hover">
+        </div>
+        <div class="name-and-text">
+            <div class="name">
+                <h1>蔡昀錚</h1>
+            </div>
+            <div class="text-content">
+                <p>你好！我是一名來自陽明交通大學的學生，目前就讀資訊工程學系。<br></p>
+                <p><img src="../img/star.png" alt="星星圖標">出生：2004 / 08 / 26<br></p>
+                <p><img src="../img/star.png" alt="星星圖標">血型：AB<br></p>
+                <p><img src="../img/star.png" alt="星星圖標">星座：處女座<br></p>
+                <p><img src="../img/star.png" alt="星星圖標">MBTI：ISTP</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="next-page-option">
+        <span class="click-text">按 這 裡 !!! &rarr;</span>
+        <a href="./sitemap.html">
+            <img src="../img/ET.png" alt="前一頁">
+        </a>
+
+        <a href="../index.html" class="home-link">
+            <img src="../img/home.png" alt="首頁">
+        </a>
+    </div>
+
+    <div class="cursor-here">
+        <p>
+            &uarr; 移動滑鼠到這裡 !!!
+        </p>
+    </div>
+
+</body>
+</html>

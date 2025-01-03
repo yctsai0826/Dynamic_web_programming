@@ -1,0 +1,304 @@
+<!-- 111550035 蔡昀錚 第三次作業 11/1
+111550035 Yun-Cheng Tsai The Third Homework 11/1 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+        /* General Styles */
+        @font-face {
+            font-family: 'enfont';
+            src: url('../font/enfont.ttf') format('truetype');
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'enfont', 'cnfont', sans-serif;
+        }
+
+        body {
+            cursor: url('../img/fish.png'), auto;	
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+            z-index: -1;
+        }
+
+        /* Content Box */
+        .contact-container {
+            font-family: 'enfont', sans-serif;
+            font-size: 3vw; 
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        /* Contact List */
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-list li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-list img {
+            width: 3vw;  
+            height: 3vw;
+            margin-right: 2vw;
+        }
+
+        /* Floating Fish Styles */
+        .fish1 {
+            position: fixed;
+            width: 8vw; /* Adjust the size of the fish */
+            height: auto;
+            animation: swim1 18s linear infinite;
+            top: 10%;
+            right: 0;
+            z-index: 100;
+        }
+
+        .fish2 {
+            position: fixed;
+            width: 6vw; /* Adjust the size of the fish */
+            height: auto;
+            animation: swim2 15s linear infinite;
+            top: 50%;
+            left: 0;
+            z-index: 100;
+        }
+
+        .fish3 {
+            position: fixed;
+            width: 7vw; /* Adjust the size of the fish */
+            height: auto;
+            animation: swim3 20s linear infinite;
+            top: 80%;
+            left: 0;
+            z-index: 100;
+        }
+
+        /* Keyframe animations for fish swimming with different distances and directions */
+        @keyframes swim1 {
+            0% {
+                transform: translateX(0) scaleX(1);
+            }
+            50% {
+                transform: translateX(-150vw) scaleX(1); /* Move leftwards */
+            }
+            50.01% {
+                transform: translateX(-150vw) scaleX(-1); /* Flip at the turning point */
+            }
+            100% {
+                transform: translateX(0) scaleX(-1); /* Move back to original position, flipped */
+            }
+        }
+
+        @keyframes swim2 {
+            0% {
+                transform: translateX(0) scaleX(1);
+            }
+            50% {
+                transform: translateX(100vw) scaleX(1); /* Move rightwards */
+            }
+            50.01% {
+                transform: translateX(100vw) scaleX(-1); /* Flip at the turning point */
+            }
+            100% {
+                transform: translateX(0) scaleX(-1); /* Move back to original position, flipped */
+            }
+        }
+
+        @keyframes swim3 {
+            0% {
+                transform: translateX(0) scaleX(1);
+            }
+            50% {
+                transform: translateX(180vw) scaleX(1); /* Move rightwards */
+            }
+            50.01% {
+                transform: translateX(180vw) scaleX(-1); /* Flip at the turning point */
+            }
+            100% {
+                transform: translateX(0) scaleX(-1); /* Move back to original position, flipped */
+            }
+        }
+
+        /* Redirect Image at Bottom Right */
+        .sitemap-link {
+            position: fixed;
+            bottom: 2vw;
+            right: 2vw;
+            z-index: 2;
+        }
+
+        .sitemap-link img {
+            width: 15vw;
+            height: 15vw;
+        }
+
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 3;
+        }
+
+        .home-link img {
+            width: 3vw;
+            height: 3vw;
+        }
+
+        .pre-page {
+            position: fixed;
+            bottom: 11vh; /* Adjust button position based on viewport height */
+            right: 17vw; /* Adjust button position based on viewport width */
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 3vh;
+            color: rgb(188, 215, 251);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-container {
+                font-size: 3vw;
+            }
+            .contact-list img {
+                width: 6vw;
+                height: 6vw;
+            }
+            .sitemap-link img {
+                width: 20vw;
+                height: 20vw;
+            }
+        }
+
+        /* 新增控制移動的圖片樣式 */
+        .movable-image {
+            position: absolute;
+            top: 50%;  /* 初始位置 */
+            left: 50%;
+            width: 10vw;
+            height: auto;
+            transform: translate(-50%, -50%);
+            transition: top 0.05s, left 0.05s; /* 平滑移動效果 */
+            z-index: 100;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <video autoplay muted loop class="video-background">
+        <source src="../video/contact.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Contact Information -->
+    <div class="contact-container">
+        <ul class="contact-list">
+            <li>
+                <img src="../img/tel.png" alt="Phone">
+                <span>+886 939330191</span>
+            </li>
+            <li>
+                <img src="../img/mail.png" alt="Email">
+                <span>yctsai.cs11@nycu.edu.tw</span>
+            </li>
+            <li>
+                <img src="../img/ins.png" alt="Instagram">
+                <a href="https://www.instagram.com/megantsai_826" target="_blank" style="color: white; text-decoration: none;">megantsai_826</a>
+            </li>
+            <li>
+                <img src="../img/fb.png" alt="Facebook">
+                <a href="https://www.facebook.com/people/蔡昀錚/100012594751103" target="_blank" style="color: white; text-decoration: none;">Yun-Cheng Tsai</a>
+            </li>
+        </ul>
+    </div>
+
+    <img src="../img/movable-image.png" class="movable-image" id="movableImage" alt="Movable Image">
+
+    <!-- Fish Images -->
+    <img src="../img/fish2.png" class="fish1" alt="Fish 2">
+    <img src="../img/fish3.png" class="fish2" alt="Fish 3">
+    <img src="../img/fish4.png" class="fish3" alt="Fish 4">
+
+    <!-- Sitemap Link -->
+    <a href="./sitemap.html" class="sitemap-link">
+        <img src="../img/flower.png" alt="Sitemap">
+    </a>
+
+    <!-- Home Link -->
+    <a href="../index.html" class="home-link">
+        <img src="../img/home.png" alt="Home">
+    </a>
+
+    <div class="pre-page">
+        <p>
+            Back &rarr;
+        </p>
+    </div>
+
+    <script>
+        // 控制移動的圖片元素
+        const movableImage = document.getElementById("movableImage");
+        let topPosition = 50;  // 初始 top 位置
+        let leftPosition = 50; // 初始 left 位置
+        const moveStep = 5;    // 每次移動的步距 (px)
+
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "w":
+                case "W":
+                    topPosition -= moveStep;
+                    break;
+                case "s":
+                case "S":
+                    topPosition += moveStep;
+                    break;
+                case "a":
+                case "A":
+                    leftPosition -= moveStep;
+                    break;
+                case "d":
+                case "D":
+                    leftPosition += moveStep;
+                    break;
+                default:
+                    return; // 非指定按鍵則忽略
+            }
+
+            // 更新圖片的位置
+            movableImage.style.top = `${topPosition}%`;
+            movableImage.style.left = `${leftPosition}%`;
+        });
+    </script>
+
+</body>
+</html>

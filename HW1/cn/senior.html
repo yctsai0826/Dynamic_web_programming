@@ -1,0 +1,399 @@
+<!--
+111550035 蔡昀錚 第一次作業 9/26
+111550035 Yun-Cheng Tsai The First Homework 9/26
+-->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的高中 - 新竹女中</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'cnfont';
+            src: url('../font/cnfont.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'cnfont2';
+            src: url('../font/cnfont3.ttf') format('truetype');
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+            font-family: 'cnfont', Times, serif, sans-serif;
+            background-color: black; /* 設定整個頁面的背景為黑色 */
+        }
+
+        /* Container to enable scroll snapping */
+        .container {
+            /* 移除固定高度，讓容器高度自動適應內容 */
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        /* Section styles */
+        .section {
+            scroll-snap-align: start;
+            position: relative; /* To position absolutely positioned children */
+            width: 100%;
+            /* 移除固定高度，讓區塊高度自動適應內容 */
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-color: black; /* 確保所有 section 背景為黑色 */
+        }
+
+        /* First Section */
+        #section1 {
+            /* 保留背景圖片 */
+            background: url('../img/seniorbk1.png') no-repeat center center;
+            background-size: cover;
+            position: relative; /* Ensure that overlay-image is positioned relative to section1 */
+
+        }
+
+        /* Gradient Overlay on Top of Sliding Images */
+        #section1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0, 0, 0, 0));
+        }
+
+        .section1-content {
+            font-family: 'cnfont2', Times, serif, sans-serif;
+            z-index: 2; /* Ensure content is above the background */
+            width: 100%;
+            max-width: 1200px;
+            text-align: center; /* 文字置中 */
+        }
+
+        .section1-content h1 {
+            font-size: 2vw;
+            margin-bottom: 10vh;
+            color: rgb(63, 111, 111);
+        }
+
+        .section1-content h2 {
+            font-size: 13vw; /* 調整為合理的大小 */
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            z-index: 3;
+            margin-right: 3vw;
+            font-weight: bolder;
+        }
+
+        /* Overlay Image in Section1 */
+        .overlay-image {
+            position: absolute;
+            bottom: 0px; /* Slightly above the very bottom for padding */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 43vw; /* Adjust size as needed */
+            height: auto;
+            z-index: 4; /* Ensure it overlays the background and text */
+        }
+
+        /* Second Section (Image + Introduction) */
+        #section2 {
+            background: black; /* 純黑色背景 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'enfont2', Times, serif, sans-serif;
+            min-height: 60vh;
+            margin-top: 10vw;
+        }
+
+        .section2-content {
+            margin-left: 5vw;
+            margin-right: 5vw;
+            background: rgba(0, 0, 0, 0.8); /* 增加背景透明度以提升可讀性 */
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: slide-in 1.5s ease forwards; /* 調整動畫持續時間和緩和函數 */
+            animation-delay: 0.3s; /* 調整延遲時間 */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .section2-inner {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            gap: 20px; /* 控制圖片與文字之間的間距 */
+            text-align: justify;
+        }
+
+        .section2-inner img {
+            height: 44.5vh; /* 控制圖片寬度 */
+            width: auto;
+            border-radius: 10px;
+            margin-right: 5vw;
+        }
+
+        .section2-inner img:hover {
+            transform: scale(1.05);
+        }
+
+
+        .scroller {
+            max-height: 44.5vh;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .scroller h1 {
+            width: 95%; /* 控制文字區塊的寬度 */
+            font-size: 2.8vw;
+            color: white;
+        }
+
+        .scroller h2 {
+            width: 95%; /* 控制文字區塊的寬度 */
+            font-size: 1.5vw;
+            color: rgb(133, 189, 189);
+            margin-bottom: 1vw;
+            font-weight: lighter;
+        }
+
+        .scroller p {
+            width: 95%; /* 控制文字區塊的寬度 */
+            font-size: 1vw;
+            line-height: 1.6;
+            color: white;
+        }
+
+        .scroller img {
+            width: 2.2vw;
+            height: auto;
+            margin-left: 0.5vw;
+        }
+
+        .scroller img:hover {
+            transform: rotate(30deg);
+        }
+
+        /* Third Section (Google Map) */
+        #section3 {
+            background: black; /* 純黑色背景 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 2vw; /* 添加內邊距以避免內容貼邊 */
+            min-height: 60vh;
+            margin-top: 5vw;
+        }
+
+        .section3-content {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: slide-in 1.5s ease forwards; /* 調整動畫持續時間和緩和函數 */
+            animation-delay: 0.3s; /* 調整延遲時間 */
+            font-family: 'enfont2', Times, serif, sans-serif;
+        }
+
+        .section3-content h1 {
+            font-weight: normal;
+            font-size: 2vw;
+            color: white;
+            margin-bottom: 3vh;
+        }
+
+        .section3-content img {
+            width: 1.5vw;
+            height: auto;
+            margin-left: 0.5vw;
+            margin-right: 0.5vw;
+        }
+
+        .section3-content img:hover {
+            transform: rotate(30deg);
+        }
+
+        .map-container {
+            width: 65%;
+            max-width: 1200px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 20vw; /* 調整地圖高度 */
+            border: 0;
+            border-radius: 10px;
+        }
+
+        /* Slide-in Animation */
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .section1-content h1 {
+                font-size: 2em;
+            }
+
+            .section1-content h2 {
+                font-size: 2.5em;
+            }
+
+            .overlay-image {
+                width: 100px;
+            }
+
+            .section2-content p {
+                font-size: 1em;
+            }
+        }
+
+
+        /* Home Link Styling */
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 100;
+        }
+
+        .home-link img {
+            width: 3vw; /* Adjust size based on viewport */
+            height: 3vw;
+        }
+
+        /* Sitemap Link Styling */
+        .sitemap-link {
+            position: fixed;
+            bottom: 3.5vw;
+            right: 3.5vw;
+            z-index: 2;
+            font-family: 'cnfont', sans-serif;
+            color: white;
+            font-size: 2vw;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .sitemap-link img {
+            width: 1.5vw; /* Adjust size based on viewport */
+            height: 1.5vw;
+            margin-left: 20px;
+        }
+
+        .sitemap-link:hover {
+            color: rgb(173, 228, 230);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px lightblue;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- First Section -->
+        <section id="section1" class="section">
+            <div class="section1-content">
+                <h1>我的高中</h1>
+                <h2>新竹女中</h2>
+            </div>
+            <!-- Overlay Image -->
+            <img src="../img/scpult.png" alt="新竹女中雕像" class="overlay-image">
+        </section>
+
+        <!-- Second Section (Image + Introduction) -->
+        <section id="section2" class="section">
+            <div class="section2-content">
+                <!-- 圖片與介紹部分 -->
+                <div class="section2-inner">
+                    <img src="../img/hgsh.jpg" alt="學校介紹圖片">
+                    <div class="scroller">
+                        <h1>新竹女中<img src="../img/star2.png" alt="裝飾"></h1><br>
+                        <h2>創建於 1924 年</h2><br>
+                        <p>
+                            國立新竹女子高級中學。竹女以悠久的優良傳統為基礎，歷屆校長的精心規劃奠定了堅實的基礎，雖然當前的學生事務工作繁瑣，但更加多樣化、活潑、創新且別出心裁。關於學生的食、衣、住、行、育、清潔與應對、體能訓練、學生社團的發展與管理、各種講座與課外活動的規劃設計、國際教育旅行、參與服務學習等活動，我們都積極融合人權法治教育、性別平等教育、環保教育與生命教育。我們希望學生能具備現代公民意識，關注社會議題；鼓勵學生探索興趣，了解自我，通過參與活動培養多元視野、時間管理能力、解決問題能力、領導能力及人際交往能力，為未來作出最適應的選擇；我們也希望聰慧傑出的竹女具備「勤勞、踏實、積極、熱情」的特質，充分發揮所長，造福他人，並在社會各階層發光發熱。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Third Section (Google Map) -->
+        <section id="section3" class="section">
+            <div class="section3-content">
+                <h1><img src="../img/star2.png" alt="裝飾">地圖<img src="../img/star2.png" alt="裝飾"></h1>
+            </div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.727418381793!2d120.97301097632999!3d24.80478567796558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346835c32ff87055%3A0xe3bdf35fc5a6534a!2z5ZyL56uL5paw56u55aWz5a2Q6auY57Sa5Lit5a24!5e0!3m2!1szh-TW!2stw!4v1727198751683!5m2!1szh-TW!2stw"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </section>
+    </div>
+
+    <!-- Home Link -->
+    <a href="../index.html" class="home-link">
+        <img src="../img/home.png" alt="首頁">
+    </a>
+
+    <!-- Sitemap Link -->
+    <a href="./sitemap.html" class="sitemap-link">返回
+        <img src="../img/arrow.png" alt="網站地圖">
+    </a>
+
+</body>
+</html>

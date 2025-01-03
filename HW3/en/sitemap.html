@@ -1,0 +1,344 @@
+<!-- 111550035 蔡昀錚 第三次作業 11/1
+111550035 Yun-Cheng Tsai The Third Homework 11/1 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Site Map - Yun-Cheng Tsai's Website</title>
+    <style>
+        /* CSS Styles */
+
+        /* Font Face */
+        @font-face {
+            font-family: 'enfont';
+            src: url('../font/enfont.ttf') format('truetype');
+        }
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Body Styles */
+        body {
+            margin: 0;
+            font-family: 'enfont', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        @keyframes cursor{
+            0% { 
+                cursor: url(frame1.gif), auto;
+            }
+            50% { 
+                cursor: url(frame2.gif), auto;
+            }
+            100% { 
+                cursor: url(frame3.gif), auto;
+            }
+        }
+
+        /* CSS for Pop-up Windows */
+        .popup, .popup-2 {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border-radius: 8px;
+        }
+
+        .popup.show, .popup-2.show {
+            display: block;
+        }
+
+        .popup-content {
+            color: #333;
+            overflow: hidden; /* Make unscrollable */
+        }
+
+        .popup-2-content {
+            color: #333;
+            overflow-y: auto; /* Make scrollable */
+            max-height: 60vh; /* Limit height for scroll */
+            font-size: 3vh;
+        }
+
+        .popup-overlay, .popup-2-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-overlay.show, .popup-2-overlay.show {
+            display: block;
+        }
+
+        .popup-close, .popup-2-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .pop-button {
+            margin-top: 3vh;
+        }
+
+        /* Thumbnail Styles */
+        .thumbnail {
+            width: 80%;
+            height: auto;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+
+        /* General Element Styles */
+        header, nav, main, footer {
+            text-align: center;
+            padding: 0px;
+        }
+
+        /* Main Content Styles */
+        main {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh; /* Ensure it fills the viewport height */
+            color: white;
+            background-image: url('../img/en-site.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Main Content Container */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Image Styles */
+        .star, .line {
+            width: 17vh;
+            max-width: 150px; /* Adjust as needed */
+            height: auto;
+            margin: 20px 0;
+            z-index: 1;
+        }
+
+        /* Sitemap Styles */
+        .sitemap {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: center;
+            animation: fadeIn 1s ease-in 0s;
+        }
+
+        .sitemap li {
+            margin: 10px 0;
+        }
+
+        /* General link styles */
+        .sitemap a {
+            position: relative; /* Allows the pseudo-element to be positioned relative to the link */
+            text-decoration: none;
+            font-size: 5vw; /* Responsive font size */
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        /* Hover effect: change text color */
+        .sitemap a:hover {
+            color: #7a6690;
+        }
+
+        /* Add an arrow when hovered */
+        .sitemap a:hover::after {
+            content: ' >'; /* Unicode for right arrow */
+            transition: content 0.3s ease; /* Smooth content transition */
+        }
+
+        /* Back to Home Link */
+        .back-home {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in 0s;
+        }
+
+        .back-home a {
+            text-decoration: none;
+            font-size: 5vw; /* Responsive font size */
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            color: #726690;
+            text-shadow: 0 0 10px rgb(31, 20, 41);
+        }
+
+        .arrow-icon {
+            width: 24px;
+            height: auto;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        /* Responsive Font Sizes */
+        @media (min-width: 600px) {
+            .sitemap a {
+                font-size: 3vh;
+            }
+            .back-home a {
+                font-size: 3vh;
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <main>
+
+        <div class="popup-overlay"></div>
+        <div class="popup">
+            <div class="popup-content">
+                <span class="popup-close">&times;</span>
+                <p>You can change the background image with the button!</p>
+            </div>
+        </div>
+
+        <!-- Second Pop-up Window -->
+        <div class="popup-2-overlay"></div>
+        <div class="popup-2">
+            <div class="popup-2-content">
+                <span class="popup-2-close">&times;</span>
+                <p>Choose your own background image：</p>
+                <img src="../img/en-site.jpg" class="thumbnail" onclick="changeBackground('../img/en-site.jpg')" alt="Background 1">
+                <img src="../img/en-site2.jpg" class="thumbnail" onclick="changeBackground('../img/en-site2.jpg')" alt="Background 2">
+                <img src="../img/en-site3.jpg" class="thumbnail" onclick="changeBackground('../img/en-site3.jpg')" alt="Background 3">
+                <img src="../img/en-site4.jpg" class="thumbnail" onclick="changeBackground('../img/en-site4.jpg')" alt="Background 4">
+            </div>
+        </div>
+
+
+        <img src="../img/star.png" class="star" alt="Star Image">
+
+        <ul class="sitemap">
+            <li><a href="./about.html">About Me</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="./cv.html">CV</a></li>
+            <li><a href="./department.html">Department</a></li>
+            <li><a href="./hobby.html">Hobby</a></li>
+            <li><a href="./senior.html">Senior High School</a></li>
+        </ul>
+
+        <img src="../img/line.png" class="line" alt="Line Image">
+
+        <div class="back-home">
+            <a href="../index.html">Back to Home
+                <img src="../img/arrow.png" alt="Arrow" class="arrow-icon">
+            </a>
+        </div>
+
+        <div class="pop-button">
+            <button id="open-popup-2">Change Background</button>
+        </div>
+
+        
+    </main>
+
+    <script>
+        // First Pop-up Window
+        window.onload = function () {
+            const popup = document.querySelector('.popup');
+            const overlay = document.querySelector('.popup-overlay');
+            const closeBtn = document.querySelector('.popup-close');
+            const openPopup2Btn = document.getElementById('open-popup-2');
+
+            // Show the first pop-up and disable scrolling
+            popup.classList.add('show');
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';  // Disable scrolling for both the main page and pop-up
+
+            closeBtn.onclick = function () {
+                popup.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';  // Enable scrolling again
+            };
+
+            overlay.onclick = function () {
+                popup.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';  // Enable scrolling again
+            };
+
+            openPopup2Btn.onclick = function () {
+                popup.classList.remove('show');
+                overlay.classList.remove('show');
+                popup2.classList.add('show');
+                overlay2.classList.add('show');
+            };
+        };
+
+
+        // Second Pop-up Window
+        const popup2 = document.querySelector('.popup-2');
+        const overlay2 = document.querySelector('.popup-2-overlay');
+        const closeBtn2 = document.querySelector('.popup-2-close');
+
+        closeBtn2.onclick = function () {
+            popup2.classList.remove('show');
+            overlay2.classList.remove('show');
+        };
+
+        overlay2.onclick = function () {
+            popup2.classList.remove('show');
+            overlay2.classList.remove('show');
+        };
+
+        function changeBackground(imageUrl) {
+            document.querySelector('main').style.backgroundImage = `url('${imageUrl}')`;
+            popup2.classList.remove('show');
+            overlay2.classList.remove('show');
+        }
+    </script>
+
+</body>
+</html>

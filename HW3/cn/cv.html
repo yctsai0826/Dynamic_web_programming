@@ -1,0 +1,376 @@
+<!-- 111550035 蔡昀錚 第三次作業 11/1
+111550035 Yun-Cheng Tsai The Third Homework 11/1 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Page</title>
+    <style>
+        /* Base Styles */
+        * {
+            font-family: 'enfont', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'enfont';
+            src: url('../font/cnfont3.ttf') format('truetype');
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrollbars due to absolute positioning */
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        /* Hide the checkbox */
+        #theme-switch {
+            display: none;
+        }
+
+        /* Video Backgrounds */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Light Theme Video (Default) */
+        #video-light {
+            opacity: 1;
+        }
+
+        /* Dark Theme Video */
+        #video-dark {
+            opacity: 0;
+        }
+
+        /* When theme is toggled (checkbox checked), switch videos */
+        #theme-switch:checked ~ .video-light {
+            opacity: 0;
+        }
+
+        #theme-switch:checked ~ .video-dark {
+            opacity: 1;
+        }
+
+        /* Body styles for themes */
+        body {
+            color: white;
+        }
+
+        /* Navigation Menu */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1vw 2vw;
+            z-index: 4;
+        }
+
+        .nav .logo {
+            font-size: 2vw;
+            font-weight: bold;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav ul li {
+            margin-left: 2vw;
+        }
+
+        .nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5vw;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav ul li a:hover {
+            color: lightblue;
+            transform: scale(1.1);
+        }
+
+        /* Theme Toggle Switch */
+        .theme-toggle {
+            position: relative; /* For positioning the label */
+            width: 50px;
+            height: 25px;
+            /* Ensure the label is placed correctly within the nav */
+        }
+
+        .theme-toggle label {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: #ccc;
+            border-radius: 25px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .theme-toggle label::after {
+            content: '';
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        #theme-switch:checked + label {
+            background: #666;
+        }
+
+        #theme-switch:checked + label::after {
+            transform: translateX(25px);
+        }
+
+        /* Since the checkbox is now above the videos, we need to adjust the selector */
+        /* Instead, use the general sibling combinator (~) */
+
+        /* PDF viewer container with animation */
+        .pdf-container {
+            margin-top: 8vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80%;
+            animation: fadeIn 2s ease-in-out;
+            position: relative; /* Ensure it stacks above video */
+            z-index: 1;
+        }
+
+        /* PDF iframe style */
+        iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        iframe:hover {
+            transform: scale(1.02);
+        }
+
+        /* Download text styling with animation */
+        .download-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideUp 1.5s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-text img {
+            width: 2vw;
+            height: 2vw;
+            margin-left: 0.5vw;
+            margin-right: 0.5vw;
+            transition: transform 0.3s;
+        }
+
+        .download-text img:hover {
+            transform: rotate(20deg);
+        }
+
+        .download-text a {
+            font-size: 2vw;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .download-text a:hover {
+            color: lightblue;
+            text-shadow: 0 0 10px lightblue;
+        }
+
+        /* Redirect Image at Bottom Right with hover effect */
+        .sitemap-link {
+            position: fixed;
+            bottom: 0.5vw;
+            right: 0.5vw;
+            z-index: 2;
+            transition: transform 0.3s;
+        }
+
+        .sitemap-link img {
+            width: 15vw; /* Adjust image size based on viewport width */
+            height: 15vw; /* Maintain aspect ratio */
+            opacity: 0.9;
+        }
+
+        .sitemap-link img:hover {
+            transform: scale(1.1);
+        }
+
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 3;
+            transition: transform 0.3s;
+        }
+
+        .home-link img {
+            width: 3vw; /* Adjust image size based on viewport width */
+            height: 3vw; /* Maintain aspect ratio */
+        }
+
+        .home-link img:hover {
+            transform: rotate(360deg);
+        }
+
+        /* Responsive Design */
+        @media only screen and (max-width: 768px) {
+            .nav .logo {
+                font-size: 4vw;
+            }
+
+            .nav ul li a {
+                font-size: 3vw;
+            }
+
+            iframe {
+                width: 90%;
+                height: 70%;
+            }
+
+            .download-text a {
+                font-size: 16px;
+            }
+
+            .sitemap-link img, .home-link img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .nav .logo {
+                font-size: 5vw;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: fixed;
+                top: 0;
+                left: 0; /* Changed to 0 to always show */
+                width: 100%;
+                height: auto;
+                transition: none; /* Removed transition as checkbox is removed */
+            }
+
+            .nav ul li {
+                margin: 2vw 0;
+                text-align: center;
+            }
+
+            .nav ul li a {
+                font-size: 5vw;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Theme Switch Checkbox (Moved above videos) -->
+    <input type="checkbox" id="theme-switch">
+
+    <!-- Video Backgrounds -->
+    <video id="video-light" class="video-bg video-light" src="../video/sky.mp4" autoplay muted loop></video>
+    <video id="video-dark" class="video-bg video-dark" src="../video/main.mp4" autoplay muted loop></video>
+
+    <!-- Navigation Menu -->
+    <nav class="nav">
+        <div class="logo">我的履歷</div>
+        <ul>
+            <!-- Removed "View CV" and "Download" links -->
+            <li><a href="./sitemap.html">網站地圖</a></li>
+            <li><a href="../index.html">主頁</a></li>
+        </ul>
+        <!-- Theme Toggle (Label moved here) -->
+        <div class="theme-toggle">
+            <label for="theme-switch"></label>
+        </div>
+    </nav>
+
+    <!-- PDF Display -->
+    <div class="pdf-container" id="pdf">
+        <iframe src="../file/cv.pdf"></iframe>
+    </div>
+
+    <!-- Download Text -->
+    <div class="download-text" id="download">
+        <img src="../img/star2.png" alt="Star">
+        <a href="../file/cv.pdf" download>下載檔案</a> 
+        <img src="../img/star2.png" alt="Star">
+    </div>
+
+    <a href="./sitemap.html" class="sitemap-link">
+        <img src="../gif/earth.gif" alt="Sitemap">
+    </a>
+    
+
+    <style>
+
+        #theme-switch:checked ~ .nav {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Dark Theme: Change link colors */
+        #theme-switch:checked ~ .nav ul li a {
+            color: #f9e48e;
+        }
+
+        #theme-switch:checked ~ .nav ul li a:hover {
+            color: #f4c46a;
+        }
+
+        /* Dark Theme: Change download link color */
+        #theme-switch:checked ~ .download-text a {
+            color: #f1d255;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+
+    </style>
+
+</body>
+</html>

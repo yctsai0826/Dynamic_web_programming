@@ -1,0 +1,288 @@
+<!--
+111550035 蔡昀錚 第一次作業 9/26
+111550035 Yun-Cheng Tsai The First Homework 9/26
+-->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>愛好展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @font-face {
+            font-family: 'enfont';
+            src: url('../font/enfont.ttf') format('truetype');
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'enfont', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2vw;
+        }
+
+        /* 示例背景圖片。請用您的圖片URL替換 */
+        .section1 { background-image: url('../img/Drawing.jpg'); }
+        .section2 { background-image: url('../img/KB.jpg'); }
+        .section3 { background-image: url('../img/camp.jpg'); }
+        .section4 { background-image: url('../img/coding.jpg'); }
+        .section5 { background-image: url('../img/music.jpg'); }
+
+
+        /* 覆蓋層內的內容容器 */
+        .content {
+            opacity: 0;
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 2vw;
+            border-radius: 10px;
+            max-width: 80%; /* 限制內容容器的最大寬度，避免覆蓋整個頁面 */
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
+            animation-delay: 0.3s;
+            z-index: 2;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section1 .content {
+            opacity: 0;
+            transform: translateY(0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            animation: fadeInUp 1s forwards;
+        }
+
+
+        /* When the section is targeted (via anchor links) */
+        section:target .content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* 當內容滾動到視窗時觸發動畫 */
+        section:nth-of-type(1) .content {
+            animation-delay: 0.3s;
+        }
+
+        section:nth-of-type(2) .content {
+            animation-delay: 0.6s;
+        }
+
+        section:nth-of-type(3) .content {
+            animation-delay: 0.9s;
+        }
+
+        section:nth-of-type(4) .content {
+            animation-delay: 1.2s;
+        }
+
+        section:nth-of-type(5) .content {
+            animation-delay: 1.5s;
+        }
+
+        .content h1 {
+            font-size: 4vw;
+            font-weight: bolder;
+            margin-bottom: 1vh;
+        }
+
+        .content p {
+            font-size: 1.2vw;
+            text-align: justify;
+            line-height: 1.6;
+            /* Optional: Add animation to paragraphs if desired */
+        }
+
+        .content img {
+            margin-bottom: 3vh;
+            width: 5vw;
+            margin-top: 1vh;
+        }
+
+        /* Navigation Button Styling */
+        .nav-button {
+            position: absolute;
+            bottom: 2vh;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 3;
+            outline: none;
+        }
+
+        .nav-button img {
+            width: 3vw;
+            height: 3vw;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-button:focus img,
+        .nav-button:hover img {
+            transform: translateY(5px);
+        }
+
+        /* Home Link Styling */
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 100;
+        }
+
+        .home-link img {
+            width: 3vw; /* Adjust size based on viewport */
+            height: 3vw;
+        }
+
+        /* Sitemap Link Styling */
+        .sitemap-link {
+            position: fixed;
+            bottom: 3.5vw;
+            right: 3.5vw;
+            z-index: 100;
+            font-family: 'enfont', sans-serif;
+            color: white;
+            font-size: 2vw;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sitemap-link img {
+            width: 1.5vw; /* Adjust size based on viewport */
+            height: 1.5vw;
+            margin-left: 20px;
+        }
+
+        .sitemap-link:hover {
+            color: rgb(173, 228, 230);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px lightblue;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .content h1 {
+                font-size: 6vw;
+            }
+
+            .content p {
+                font-size: 3.5vw;
+            }
+
+            .home-link img,
+            .sitemap-link img {
+                width: 5vw;
+                height: 5vw;
+            }
+
+            .nav-button img {
+                width: 5vw;
+                height: 5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Home Link -->
+    <a href="home.html" class="home-link">
+        <img src="../img/home.png" alt="Home">
+    </a>
+
+    <!-- Sitemap Link -->
+    <a href="sitemap.html" class="sitemap-link">
+        Back
+        <img src="../img/arrow.png" alt="Sitemap">
+    </a>
+
+    <!-- Sections -->
+    <section id="section1" class="section1">
+        <div class="content">
+            <h1>Drawing</h1>
+            <img src="../img/dagger.png" alt="line">
+            <p>I learned drawing when I was young. Although it didn't lead me to study art in college or become a professional artist, drawing has played a significant role in my life. I draw whenever I dream about something beautiful or when something is bothering me. Thus, I consider drawing a soulmate in my life, providing an outlet for my creativity and emotions.</p>
+        </div>
+        <a href="#section2" class="nav-button" aria-label="Scroll to KeyBoard Section">
+            <img src="../img/darr.png" alt="Scroll Down">
+        </a>
+    </section>
+
+    <section id="section2" class="section2">
+        <div class="content">
+            <h1>KeyBoard</h1>
+            <img src="../img/dagger.png" alt="line">
+            <p>During my senior high school years, I joined the Music club, which ignited my passion for music and technology. Through numerous practice sessions and performances, I developed not only my technical skills in playing various keyboard instruments but also teamwork and leadership abilities. The KB club provided a platform for me to express myself creatively and collaborate with like-minded peers, fostering a deep appreciation for both music and collaborative projects.</p>
+        </div>
+        <a href="#section3" class="nav-button" aria-label="Scroll to School Camp Section">
+            <img src="../img/darr.png" alt="Scroll Down">
+        </a>
+    </section>
+
+    <section id="section3" class="section3">
+        <div class="content">
+            <h1>School Camp</h1>
+            <img src="../img/dagger.png" alt="line">
+            <p>I have participated in several camps organized by NYCU CS, catering to different groups such as freshmen, upperclassmen, and senior high students. These camps have been instrumental in enhancing my skills in computer science, fostering leadership qualities, and building strong friendships. Engaging in various workshops, team projects, and outdoor activities has not only broadened my technical knowledge but also taught me the importance of collaboration and resilience.</p>
+        </div>
+        <a href="#section4" class="nav-button" aria-label="Scroll to Coding Section">
+            <img src="../img/darr.png" alt="Scroll Down">
+        </a>
+    </section>
+
+    <section id="section4" class="section4">
+        <div class="content">
+            <h1>Coding</h1>
+            <img src="../img/dagger.png" alt="line">
+            <p>After enrolling in the computer science program at NYCU, I delved deeper into the world of coding. From mastering programming languages like Python and Java to developing complex algorithms and building innovative projects, coding has become a cornerstone of my academic and personal growth. The challenges and successes in coding have honed my problem-solving skills, enabling me to approach complex issues with confidence and creativity.</p>
+        </div>
+        <a href="#section5" class="nav-button" aria-label="Scroll to Music Section">
+            <img src="../img/darr.png" alt="Scroll Down">
+        </a>
+    </section>
+
+    <section id="section5" class="section5">
+        <div class="content">
+            <h1>Music</h1>
+            <img src="../img/dagger.png" alt="line">
+            <p>Music has always been a significant part of my life. I enjoy various genres, including K-pop, and pop music, and admire artists like Taylor Swift for their lyrical prowess and stage presence. Playing instruments, attending concerts, and exploring different musical styles have enriched my cultural understanding and provided a relaxing escape from the rigors of daily life. Music not only entertains but also inspires and motivates me in countless ways.</p>
+        </div>
+        <!-- No navigation button on the last section -->
+    </section>
+
+</body>
+</html>

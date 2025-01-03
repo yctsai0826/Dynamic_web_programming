@@ -1,0 +1,233 @@
+<!-- 111550035 蔡昀錚 第三次作業 11/1
+111550035 Yun-Cheng Tsai The Third Homework 11/1 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Elements Overview</title>
+    <style>
+        @font-face {
+            font-family: 'enfont';
+            src: url('./font/enfont.ttf') format('truetype');
+        }
+
+        body {
+            background: url('./img/ele.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            font-family: 'enfont', sans-serif;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            gap: 20px;
+            margin-left: 10vw;
+            margin-right: 10vw;
+        }
+
+        .content-container {
+            width: 45%;
+            height: 65vh; /* Set height for scroll */
+            background-color: rgba(0, 0, 0, 0.3); /* Opacity set using rgba */
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.1);
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 5vh;
+            margin-top: 10vh;
+            margin-bottom: 10vh;
+            margin-right: 2vw;
+            margin-left: 2vw;
+            color: white;
+        }
+
+        .content-container2 {
+            width: 45%;
+            height: 65vh; /* Set height for scroll */
+            background-color: rgba(0, 0, 0, 0.3); /* Opacity set using rgba */
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.1);
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 5vh;
+            margin-top: 10vh;
+            margin-bottom: 10vh;
+            margin-right: 2vw;
+            margin-left: 2vw;
+            color: white;
+        }
+
+        h2 {
+            font-size: 5vh;
+            text-align: center;
+            margin-top: 0;
+            text-shadow: #6c8385;
+        }
+
+        ul {
+            font-size: 2.5vh;
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .content-container:hover {
+            transform: scale(1.02);
+        }
+
+        .content-container2:hover {
+            transform: scale(1.02);
+        }
+
+        .content-container li:hover {
+            color: rgb(249, 248, 173);
+            transform: scale(1.1);
+        }
+
+        .content-container2 li:hover {
+            color: rgb(173, 214, 249);
+            transform: scale(1.1);
+        }
+
+
+        /* Sitemap Link Styling */
+        .sitemap-link {
+            position: fixed;
+            bottom: 3.5vw;
+            right: 3.5vw;
+            z-index: 2;
+            font-family: 'enfont', sans-serif;
+            color: white;
+            font-size: 2vw;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+          
+
+        .sitemap-link img {
+            width: 1.5vw; /* Adjust size based on viewport */
+            height: 1.5vw;
+            margin-left: 20px;
+        }
+
+        .sitemap-link:hover {
+            color: lightblue;
+            transform: scale(1.1);
+            text-shadow: 0 0 5px lightblue;
+        }
+
+        /* Add custom scrollbar styles (optional) */
+        ::-webkit-scrollbar {
+            opacity: 0.5;
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #6c8385;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HTML Elements List -->
+        <div class="content-container">
+            <h2>HTML Elements</h2>
+            <ul>
+                <li>&lt;html&gt;</li>
+                <li>&lt;head&gt;</li>
+                <li>&lt;meta&gt;</li>
+                <li>&lt;title&gt;</li>
+                <li>&lt;link&gt;</li>
+                <li>&lt;style&gt;</li>
+                <li>&lt;body&gt;</li>
+                <li>&lt;header&gt;</li>
+                <li>&lt;nav&gt;</li>
+                <li>&lt;main&gt;</li>
+                <li>&lt;footer&gt;</li>
+                <li>&lt;section&gt;</li>
+                <li>&lt;h1&gt;</li>
+                <li>&lt;h2&gt;</li>
+                <li>&lt;h3&gt;</li>
+                <li>&lt;h4&gt;</li>
+                <li>&lt;h5&gt;</li>
+                <li>&lt;p&gt;</li>
+                <li>&lt;a&gt;</li>
+                <li>&lt;img&gt;</li>
+                <li>&lt;video&gt;</li>
+                <li>&lt;ul&gt;</li>
+                <li>&lt;li&gt;</li>
+                <li>&lt;iframe&gt;</li>
+                <li>&lt;button&gt;</li>
+                <li>&lt;div&gt;</li>
+                <li>&lt;span&gt;</li>
+            </ul>
+        </div>
+
+        <!-- CSS Elements List -->
+        <div class="content-container2">
+            <h2>CSS Elements</h2>
+            <ul>
+                <li>margin-top/bottom/left/right</li>
+                <li>padding</li>
+                <li>box-sizing</li>
+                <li>font-family</li>
+                <li>background-color</li>
+                <li>background-image</li>
+                <li>background-size</li>
+                <li>background-position</li>
+                <li>color</li>
+                <li>text-align</li>
+                <li>position</li>
+                <li>width</li>
+                <li>height</li>
+                <li>display</li>
+                <li>flex</li>
+                <li>justify-content</li>
+                <li>align-items</li>
+                <li>overflow</li>
+                <li>z-index</li>
+                <li>border</li>
+                <li>border-radius</li>
+                <li>box-shadow</li>
+                <li>font-size</li>
+                <li>font-weight</li>
+                <li>animation</li>
+                <li>cursor</li>
+                <li>object-fit</li>
+                <li>opacity</li>
+                <li>transform</li>
+                <li>transition</li>
+                <li>scroll-snap-type</li>
+                <li>line-height</li>
+                <li>@keyframes</li>
+                <li>@font-face</li>
+                <li>@media</li>
+                <li>#checked ~</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Sitemap Link -->
+    <a href="./index.html" class="sitemap-link">Back
+        <img src="./img/arrow.png" alt="Sitemap">
+    </a>
+    
+</body>
+</html>

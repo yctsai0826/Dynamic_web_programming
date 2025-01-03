@@ -1,0 +1,286 @@
+<!--
+111550035 蔡昀錚 第一次作業 9/26
+111550035 Yun-Cheng Tsai The First Homework 9/26
+-->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>愛好展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @font-face {
+            font-family: 'cnfont';
+            src: url('../font/cnfont3.ttf') format('truetype');
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'cnfont', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2vw;
+        }
+
+        /* 示例背景圖片。請用您的圖片URL替換 */
+        .section1 { background-image: url('../img/Drawing.jpg'); }
+        .section2 { background-image: url('../img/KB.jpg'); }
+        .section3 { background-image: url('../img/camp.jpg'); }
+        .section4 { background-image: url('../img/coding.jpg'); }
+        .section5 { background-image: url('../img/music.jpg'); }
+
+
+        /* 覆蓋層內的內容容器 */
+        .content {
+            opacity: 0;
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 2vw;
+            border-radius: 10px;
+            max-width: 80%; /* 限制內容容器的最大寬度，避免覆蓋整個頁面 */
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
+            animation-delay: 0.3s;
+            z-index: 2;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section1 .content {
+            opacity: 0;
+            transform: translateY(0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            animation: fadeInUp 1s forwards;
+        }
+
+
+        /* When the section is targeted (via anchor links) */
+        section:target .content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 當內容滾動到視窗時觸發動畫 */
+        section:nth-of-type(1) .content {
+            animation-delay: 0.3s;
+        }
+
+        section:nth-of-type(2) .content {
+            animation-delay: 0.6s;
+        }
+
+        section:nth-of-type(3) .content {
+            animation-delay: 0.9s;
+        }
+
+        section:nth-of-type(4) .content {
+            animation-delay: 1.2s;
+        }
+
+        section:nth-of-type(5) .content {
+            animation-delay: 1.5s;
+        }
+
+        .content h1 {
+            font-size: 4vw;
+            font-weight: bolder;
+            margin-bottom: 1vh;
+        }
+
+        .content p {
+            font-size: 1.2vw;
+            text-align: justify;
+            line-height: 1.6;
+            /* Optional: Add animation to paragraphs if desired */
+        }
+
+        .content img {
+            margin-bottom: 3vh;
+            width: 5vw;
+            margin-top: 1vh;
+        }
+
+        /* Navigation Button Styling */
+        .nav-button {
+            position: absolute;
+            bottom: 2vh;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 3;
+            outline: none;
+        }
+
+        .nav-button img {
+            width: 3vw;
+            height: 3vw;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-button:focus img,
+        .nav-button:hover img {
+            transform: translateY(5px);
+        }
+
+        /* Home Link Styling */
+        .home-link {
+            position: fixed;
+            top: 2vw;
+            right: 2vw;
+            z-index: 100;
+        }
+
+        .home-link img {
+            width: 3vw; /* Adjust size based on viewport */
+            height: 3vw;
+        }
+
+        /* Sitemap Link Styling */
+        .sitemap-link {
+            position: fixed;
+            bottom: 3.5vw;
+            right: 3.5vw;
+            z-index: 100;
+            font-family: 'cnfont', sans-serif;
+            color: white;
+            font-size: 2vw;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sitemap-link img {
+            width: 1.5vw; /* Adjust size based on viewport */
+            height: 1.5vw;
+            margin-left: 20px;
+        }
+
+        .sitemap-link:hover {
+            color: rgb(173, 228, 230);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px lightblue;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .content h1 {
+                font-size: 6vw;
+            }
+
+            .content p {
+                font-size: 3.5vw;
+            }
+
+            .home-link img,
+            .sitemap-link img {
+                width: 5vw;
+                height: 5vw;
+            }
+
+            .nav-button img {
+                width: 5vw;
+                height: 5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Home Link -->
+    <a href="home.html" class="home-link">
+        <img src="../img/home.png" alt="首頁">
+    </a>
+
+    <!-- Sitemap Link -->
+    <a href="sitemap.html" class="sitemap-link">
+        返回
+        <img src="../img/arrow.png" alt="網站地圖">
+    </a>
+
+    <!-- Sections -->
+    <section id="section1" class="section1">
+        <div class="content">
+            <h1>畫畫</h1>
+            <img src="../img/dagger.png" alt="線條">
+            <p>我從小學習畫畫。雖然我沒有因此選擇就讀藝術相關科系，也沒有成為專業的藝術家，但畫畫在我生命中扮演著重要角色。每當我夢見一些美好的事物，或是遇到煩惱時，我都會拿起筆來創作。因此，我將畫畫視為我生命中的知己，讓我能夠透過創作表達我的情感與創意。</p>
+        </div>
+        <a href="#section2" class="nav-button" aria-label="Scroll to KeyBoard Section">
+            <img src="../img/darr.png" alt="向下捲動">
+        </a>
+    </section>
+
+    <section id="section2" class="section2">
+        <div class="content">
+            <h1>鍵盤</h1>
+            <img src="../img/dagger.png" alt="線條">
+            <p>在高中的時候，我加入了音樂社，點燃了我對音樂和科技的熱情。透過不斷的練習與表演，我不僅提升了彈奏各種鍵盤樂器的技術，也學會了團隊合作與領導能力。鍵盤社為我提供了一個表達創意的舞台，並與志同道合的夥伴共同合作，培養了我對音樂與團隊合作的深厚興趣。</p>
+        </div>
+        <a href="#section3" class="nav-button" aria-label="Scroll to School Camp Section">
+            <img src="../img/darr.png" alt="向下捲動">
+        </a>
+    </section>
+
+    <section id="section3" class="section3">
+        <div class="content">
+            <h1>校園營隊</h1>
+            <img src="../img/dagger.png" alt="線條">
+            <p>我參加過陽明交大資工系舉辦的幾個營隊，這些營隊針對不同群體，例如大一新生、高年級學生與高中生，幫助我在資訊工程方面的技能提升，並培養了領導能力與友誼。參與各類工作坊、團隊項目與戶外活動，不僅拓展了我的技術知識，也讓我學會了團隊合作與堅韌不拔的精神。</p>
+        </div>
+        <a href="#section4" class="nav-button" aria-label="Scroll to Coding Section">
+            <img src="../img/darr.png" alt="向下捲動">
+        </a>
+    </section>
+
+    <section id="section4" class="section4">
+        <div class="content">
+            <h1>編程</h1>
+            <img src="../img/dagger.png" alt="分隔線">
+            <p>在進入國立陽明交通大學計算機科學系後，我更深入地探索了編程的世界。從掌握Python和Java等程式語言，到開發複雜的算法和創新專案，編程成為我學術和個人成長的重要基石。編程中的挑戰和成功磨練了我的問題解決能力，使我能夠自信和有創意地應對複雜問題。</p>
+        </div>
+        <a href="#section5" class="nav-button" aria-label="滾動到音樂區域">
+            <img src="../img/darr.png" alt="向下滾動">
+        </a>
+    </section>
+
+    <section id="section5" class="section5">
+        <div class="content">
+            <h1>音樂</h1>
+            <img src="../img/dagger.png" alt="分隔線">
+            <p>音樂一直是我生活中重要的一部分。我喜愛各種音樂流派，包括韓流和流行音樂，並且非常欣賞像泰勒絲這樣的藝術家，他們在歌詞創作和舞台表演方面的才華讓我著迷。演奏樂器、參加音樂會以及探索不同的音樂風格，不僅豐富了我的文化理解，也為我提供了從日常生活壓力中解脫的放鬆途徑。音樂不僅娛樂了我，也在無數方面激勵和啟發了我。</p>
+        </div>
+    </section>
+
+</body>
+</html>
